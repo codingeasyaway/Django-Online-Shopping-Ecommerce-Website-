@@ -1,0 +1,57 @@
+{% extends 'ecommerce/base.html' %}
+{% block title %} Checkout / E-commerce {% endblock title %}
+{% block content %}
+
+<div class="container mt-5">
+<div class="row mt-4">
+    <div class="col-sm-6 mt-4">
+        <h3 class="text-center mb-3" style="color:#F2AA4CFF">Items in the cart</h3>
+
+  <table class="table text-center mt-4 bg-white">
+                <thead>
+                <tr >
+                    <th>SN</th>
+                    <th>Product</th>
+                    <th>Rate</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{cp.product.title}}</td>
+                        <td>{{cp.rate}}</td>
+                        <td>{{cp.quantity}}</td>
+                        <td>{{cp.subtotal}}</td>
+
+                    </tr>
+                    {% endfor %}
+                <tr>
+                    <th class="text-right" colspan="4" style="color:#F2AA4CFF">Total Amount :</th>
+                    <td class="text-center" >Rs. {{cart.total}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+        <a href="{% url 'eapp:MyCart' %}" class="my-4 btn btn-dark" style="color:#F2AA4CFF">Update Cart</a>
+    </div>
+
+
+     <div class="col-sm-6 mt-4">
+        <h3 class=" text-center mb-3" style="color:#F2AA4CFF">Checkout Here</h3>
+
+
+         <form action="" method="POST" class="mt-4">
+             {% csrf_token %}
+             {{form.as_p}}
+             <button class="btn btn-dark" style="color:#F2AA4CFF">Place order</button>
+         </form>
+
+
+    </div>
+</div>
+</div>
+{% endblock content %}

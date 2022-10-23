@@ -1,0 +1,55 @@
+{% extends 'admindashboard/base.html' %}
+{% block title %} Admin Order Details - Ecommerce {% endblock title %}
+{% load humanize %}
+{% block content %}
+<h1 class="text-center mt-4" style="color:#F2AA4CFF"> Admin Order Details </h1>
+<div class="container-fluid">
+<div class="row my-5">
+    <div class="col-md-12 ">
+<p class="mt-3"><span class="font-weight-bold">Order ID : </span>Order_{{ord_obj.id}}</p>
+            <p class="mt-3"><span class="font-weight-bold">Order Status : </span>{{ord_obj.order_status}}</p>
+            <p class="mt-3"><span class="font-weight-bold">Order On : </span>{{ord_obj.created_at}} ({{ord_obj.created_at|timesince}} ago)</p>
+            <p class="mt-3"><span class="font-weight-bold">Customer Information : </span>By {{ord_obj.ordered_by}}, {{ord_obj.mobile}}</p>
+            <p class="mt-3"><span class="font-weight-bold">Shipping Address : </span>By {{ord_obj.shipping_address}} ( {{ord_obj.email}} )</p>
+
+            <h3 class="mt-3">Order items</h3>
+            <table class="table ">
+    <thead>
+      <tr>
+        <th>SN</th>
+        <th>Item</th>
+        <th>Rate</th>
+          <th>Quantity</th>
+          <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for cp in ord_obj.cart.cartproduct_set.all %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td><a href="{% url 'eapp:ProductDetail' cp.product.slug %}" target="_blank" style="color:#F2AA4CFF">{{cp.product.title}} ({{cp.product.id}})</a></td>
+          <td>{{cp.rate}}</td>
+          <td>{{cp.quantity}}</td>
+          <td>{{cp.subtotal}}</td>
+      </tr>
+    <tr>
+        <th colspan="4" class="text-right">Total : </th>
+        <td>Rs.{{ord_obj.total|intcomma}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+        <form action="{% url 'eapp:AdminOrderStatusChange' ord_obj.id %}" method="post">{% csrf_token %}
+            <select name="status" class="form-control col-3" >
+                {% for i , j in  allstatus %}
+                <option value="{{i}}" {% if i == ord_obj.order_status %} selected {% endif %}>{{j}}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-dark mt-3" style="color:#F2AA4CFF">Change</button>
+        </form>
+
+    </div>
+</div>
+</div>
+{% endblock content %}
+

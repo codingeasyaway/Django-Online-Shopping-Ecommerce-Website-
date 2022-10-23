@@ -1,0 +1,47 @@
+{% extends 'ecommerce/base.html' %}
+{% block title %} All Product / E-commerce {% endblock title %}
+{% block content %}
+{{product_list}}
+
+<div class="container py-5" >
+
+    {% for c in allcategories %}
+    <h4 class="text-center mt-2 mb-2 " style="color:#F2AA4CFF">{{c.title}}</h4>
+    <hr>
+
+  <!-- Our Product Start-->
+  <div class="row mb-2 mt-4">
+      {% for p in c.product_set.all %}
+        <!------ {{p.title}} product  Start------>
+<div class="col-sm-3 my-4">
+      <div class="card border-0 mx-1 my-1" style="width: 15rem;">
+  <img src="{{p.image.url}}" class="card-img-top" alt="{{p.title}}" height="200">
+  <div class="card-body ">
+    <h5 class="card-title text-center" >{{p.title}}</h5>
+      <p class="card-text small text-muted font-italic text-center">Price : <strike>{{p.market_price}}</strike> / Rs : {{p.selling_price}}</p>
+    <a href="{% url 'eapp:AddToCart' p.id %}" class="btn btn-dark btn-sm float-left col-5" style="color:#F2AA4CFF">Add to cart</a>
+    <a href="{% url 'eapp:ProductDetail' p.slug %}" class="btn btn-dark btn-sm float-right col-6" style="color:#F2AA4CFF">View details</a>
+
+  </div>
+</div>
+    </div>
+      <!------ {{p.title}}  product clode -------->
+      {% endfor %}
+  </div>
+
+      <!-- Our Product close-->
+{% endfor %}
+
+</div>
+
+
+
+
+
+<div class="container-fluid ">
+ <div class="card-footer text-center bg-dark"  style="color:#F2AA4CFF">Copy Right &copy by E-Shop
+  </div>
+</div>
+
+{% endblock content %}
+

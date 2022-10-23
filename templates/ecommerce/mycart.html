@@ -1,0 +1,58 @@
+{% extends 'ecommerce/base.html' %}
+{% block title %} My Cart / E-commerce {% endblock title %}
+{% block content %}
+<div class="container mt-5">
+     <h4 class="text-center my-3" style="color:#F2AA4CFF">Item in my cart</h4>
+            <hr>
+    <div class="row">
+
+        <div class="col-md-8 px-5 py-3 mx-auto">
+
+            <table class="table text-center mt-4 bg-white">
+                <thead>
+                <tr >
+                    <th>SN</th>
+                    <th>Product</th>
+                    <th>Rate</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for cp in cart.cartproduct_set.all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{cp.product.title}}</td>
+                        <td>{{cp.rate}}</td>
+                        <td>{{cp.quantity}}</td>
+                        <td>{{cp.subtotal}}</td>
+                        <td>
+                            <a href="{% url 'eapp:ManageCart' cp.id%}?action=inc" class="btn btn-sm btn-success">+</a>
+                            <a href="{% url 'eapp:ManageCart' cp.id%}?action=drc" class="btn btn-sm btn-warning text-white">-</a>
+                            <a href="{% url 'eapp:ManageCart' cp.id%}?action=rmv" class="btn btn-sm btn-danger">x</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                <tr>
+                    <th class="text-right " colspan="4">Total Amount :</th>
+                    <td class="text-right" >Rs. {{cart.total}}</td>
+                    {% if cart.cartproduct_set.all %}
+                    <th><a href="{% url 'eapp:EmptyCart' %}" class="btn btn-danger btn-sm">Empty Cart</a></th>
+                    {% endif %}
+                </tr>
+                 {% if cart.cartproduct_set.all %}
+                <tr>
+                    <td colspan="6"><a href="{% url 'eapp:Checkout' %}" class="btn btn-dark col-12" style="color:#F2AA4CFF">Check Out</a></td>
+                </tr>
+                 {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8">
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

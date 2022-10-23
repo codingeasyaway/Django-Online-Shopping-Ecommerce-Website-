@@ -1,0 +1,32 @@
+{% extends 'ecommerce/base.html' %}
+{% block title %} Search / E-commerce {% endblock title %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row mt-5">
+        <div class="col-md-12 mt-5">
+            <h1>Search Results For "<span style="color:#F2AA4CFF">{{request.GET.keyword}}</span>"</h1>
+            <hr>
+
+            <div class="row mb-3">
+                {% for p in results %}
+        <!------ {{p.title}} product  Start------>
+<div class="col-sm-3 col-12 col-md-3 my-4">
+      <div class="card border-0 mx-4 my-2" style="width: 15rem;">
+  <img src="{{p.image.url}}" class="card-img-top" alt="{{p.title}}" height="200">
+  <div class="card-body ">
+    <h5 class="card-title text-dark text-center">{{p.title}}</h5>
+      <p class="card-text small text-muted font-italic text-center">Price : <strike>{{p.market_price}}</strike> / Rs : {{p.selling_price}}</p>
+    <a href="{% url 'eapp:AddToCart' p.id %}" class="btn btn-dark btn-sm float-left col-5" style="color:#F2AA4CFF">Add to cart</a>
+    <a href="{% url 'eapp:ProductDetail' p.slug %}" class="btn btn-dark btn-sm float-right col-6" style="color:#F2AA4CFF">View details</a>
+
+  </div>
+</div>
+    </div>
+      <!------ {{p.title}}  product clode -------->
+      {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

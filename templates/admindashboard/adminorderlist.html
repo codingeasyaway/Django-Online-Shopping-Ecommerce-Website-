@@ -1,0 +1,42 @@
+{% extends 'admindashboard/base.html' %}
+{% block title %} All Orders - Ecommerce {% endblock title %}
+
+{% block content %}
+
+
+<div class="row my-5">
+    <div class="col-md-12 ">
+
+                <table class="table border" >
+
+    <thead>
+    <tr>
+                <th colspan="6"><h1 class="text-center " style="color:#F2AA4CFF">All Orders List</h1></th>
+            </tr>
+      <tr>
+        <th>SN</th>
+          <th>Order ID</th>
+        <th>Customer</th>
+          <th>Ordered on</th>
+          <th>Amount</th>
+          <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for po in allorders %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+          <td><a href="{% url 'eapp:AdminOrderDetails' po.id %}" style="color:#F2AA4CFF">Order_{{po.id}}</a></td>
+        <td>{{po.ordered_by}}</td>
+          <td>{{po.created_at|timesince}} ago</td>
+          <td>{{po.total}}</td>
+          <td>{{po.order_status}}</td>
+      </tr>
+{% endfor %}
+    </tbody>
+  </table>
+
+    </div>
+</div>
+{% endblock content %}
+

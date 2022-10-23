@@ -1,0 +1,31 @@
+{% extends 'ecommerce/base.html' %}
+<style>
+.errorlist{
+color:red;
+list-style-type:none;
+text-align:center;
+}
+</style>
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-md-12">
+            <h3 class="text-center mt-4 mb-3 " style="color:#F2AA4CFF">Admin Login </h3>
+            <hr style="margin:auto;background-color:red" width="10%">
+        </div>
+        <div class="col-md-8 mx-auto mb-5 mt-5 ">
+            <form action="" method="POST" class="border p-3 mt-4" novalidate>
+                {% csrf_token %}
+                  {% if error %}
+                    <p class="text-dark col-12 mt-2 alert alert-danger" >{{error}}</p>
+                {% endif %}
+                {{form.as_p}}
+            <button class="btn btn-dark col-12 mt-2" style="color:#F2AA4CFF">SIGN IN</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'ecommerce/base.html' %}
+{% block title %} Create Account / E-commerce {% endblock title %}
+{% block content %}
+<style>
+.errorlist{
+background-color:red;
+color:white;
+list-style-type:none;
+text-align:center;
+height:40px;
+line-height:35px;
+}
+</style>
+
+<div class="container">
+    <div class="row mt-3 ">
+        <div class="col-md-12">
+            <h3 class="text-center mt-2 mb-3 " style="color:#F2AA4CFF">Create Account</h3>
+
+        </div>
+        <div class="col-md-8 mx-auto mb-5 ">
+            <form action="" method="POST" class="border p-3 mt-4" >
+                {% csrf_token %}
+                {{form.as_p}}
+            <button class="btn btn-dark col-12 mt-2" style="color:#F2AA4CFF">CREATE ACCOUNT</button>
+            </form>
+          <div>
+    </div>
+</div>
+    </div></div>
+
+<div class="container-fluid ">
+ <div class="card-footer text-center bg-dark"  style="color:#F2AA4CFF">Copy Right &copy by E-Shop
+  </div>
+</div>
+
+{% endblock content %}

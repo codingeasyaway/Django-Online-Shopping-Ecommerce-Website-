@@ -1,0 +1,38 @@
+{% extends 'ecommerce/base.html' %}
+{% block title %} Login / E-commerce {% endblock title %}
+{% block content %}
+<style>
+.errorlist{
+color:red;
+list-style-type:none;
+text-align:center;
+}
+</style>
+
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-md-12">
+            <h3 class="text-center  mb-3 " style="color:#F2AA4CFF">Login Here</h3>
+        </div>
+        <div class="col-md-8 mx-auto mb-5 mt-3 ">
+            <form action="" method="POST" class="border p-3 mt-4" novalidate>
+                {% csrf_token %}
+                  {% if error %}
+                    <p class="text-dark col-12 mt-2 alert alert-danger" >{{error}}</p>
+                {% endif %}
+                {{form.as_p}}
+            <button class="btn btn-dark col-12 mt-2" style="color:#F2AA4CFF">SIGN IN</button>
+
+            </form>
+              <p class="text-center mt-4 mb-3">or don't have account? <a href="/register/{% if request.GET.next%}?next={{request.GET.next}}{% endif %}" style="color:#F2AA4CFF">Create Account</a></p>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid bottom-fixed">
+ <div class="card-footer text-center bg-dark"  style="color:#F2AA4CFF">Copy Right &copy by E-Shop
+  </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+#boxshadow{
+box-shadow: 2px 2px 2px 3px #DFD5D5;
+}
+body{
+background-color:#eeeee4;
+}
+.nav-item:hover{
+background-color:#606060FF;
+border-bottom-left-radius: 10px;
+border-top-right-radius: 10px;
+text-align: center;
+}
+.active{
+color:;
+}
